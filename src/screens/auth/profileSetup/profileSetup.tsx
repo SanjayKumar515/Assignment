@@ -255,7 +255,7 @@ const ProfileSetup: FC = () => {
             >
               Select Date of Birth
             </Text>
-            <DatePicker date={date} mode="date" onDateChange={setDate} />
+            <DatePicker date={date} mode="date" onDateChange={setDate} textColor="#000000" theme="light" />
             <Button
               onPress={() => {
                 setOpenDatePicker(false);
