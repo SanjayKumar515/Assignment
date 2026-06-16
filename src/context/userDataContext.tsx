@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from 'react';
 import { LocalStorage } from '../helpers/localstorage';
-import { UserService } from '../service';
 export interface UserData {
   isLoggedIn: string | null;
   setIsLoggedIn: ( value: boolean | any ) => void;
@@ -48,31 +47,6 @@ const UserDataContextProvider: FC<Props> = ( { children } ) => {
     setIsLoggedIn( val );
   };
 
-
-  // 🔥 AUTO FETCH PROFILE PHOTO WHEN userData CHANGES
-  useEffect( () => {
-    if ( !userData ) return;
-
-    const getProfileData = async () => {
-      try {
-        const payload = {
-          StoredProcedureName: 'DocRequest_GetPhotoName',
-          Parameters: {
-            pk_stuid: userData?.pk_stuid || userData?.user?.pk_stuid,
-          },
-        };
-
-        const response = await UserService.commonApiEndpoint(
-          JSON.stringify( payload )
-        );
-        setProfileDetails( response.data ?? null );
-      } catch ( error ) {
-        console.log( 'Error in getting profile data:', error );
-      }
-    };
-
-    getProfileData();
-  }, [ userData ] );
 
 
   return (

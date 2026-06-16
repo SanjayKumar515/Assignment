@@ -1,7 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import SplashScreen from 'react-native-splash-screen';
 import { UserData, UserDataContext } from '../context/userDataContext';
@@ -45,7 +44,12 @@ const Route: FC = () => {
   // Loading state (prevents UI jump)
   if (userLogin === null) {
     return (
-      <View style={{ flex: 1, backgroundColor: Colors.PRIMARY[200] }}>
+      <LinearGradient
+      colors={['#F2DFC0', '#FFFFFF']}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 0.3 }}
+      style={{ flex: 1 }}
+    >
         <ResponsiveStatusBar
           backgroundColor="transparent"
           barStyle="dark-content"
@@ -57,13 +61,18 @@ const Route: FC = () => {
         >
           {/* Your loading content here */}
         </SafeAreaView>
-      </View>
+      </LinearGradient>
     );
   }
 
   if (isOffline) {
     return (
-      <View style={{ flex: 1, backgroundColor: Colors.PRIMARY[200] }}>
+     <LinearGradient
+      colors={['#F2DFC0', '#FFFFFF']}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 0.3 }}
+      style={{ flex: 1 }}
+    >
         <ResponsiveStatusBar
           backgroundColor="transparent"
           barStyle="dark-content"
@@ -80,15 +89,11 @@ const Route: FC = () => {
         >
           <Text style={{ color: 'white', fontSize: 18 }}>You are offline.</Text>
         </SafeAreaView>
-      </View>
+      </LinearGradient>
     );
   }
 
   return (
-    // <SafeAreaView
-    //   style={{ flex: 1 }}
-    //   edges={['left', 'right', 'bottom', 'top']}
-    // >
     <LinearGradient
       colors={['#F2DFC0', '#FFFFFF']}
       start={{ x: 0.5, y: 0 }}
@@ -117,7 +122,6 @@ const Route: FC = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </LinearGradient>
-    // </SafeAreaView>
   );
 };
 
