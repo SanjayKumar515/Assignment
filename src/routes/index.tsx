@@ -60,7 +60,7 @@ const Route: FC = () => {
           edges={['left', 'right', 'bottom']}
         >
           <Image
-            source={require('../assets/images/splash.png')}
+            source={require('../assets/images/splash.jpg')}
             style={{ width: '100%', height: '100%' }}
             resizeMode="cover"
           />
