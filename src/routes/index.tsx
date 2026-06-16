@@ -8,7 +8,7 @@ import { LocalStorage } from '../helpers/localstorage';
 import { AuthStackNavigator, HomeStackNavigator } from '../navigation';
 import { Colors, ResponsiveStatusBar } from '../constant';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text } from 'react-native';
+import { Text, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const Stack = createNativeStackNavigator();
@@ -59,7 +59,11 @@ const Route: FC = () => {
           style={{ flex: 1, backgroundColor: Colors.PRIMARY[200] }}
           edges={['left', 'right', 'bottom']}
         >
-          {/* Your loading content here */}
+          <Image
+            source={require('../assets/images/splash.png')}
+            style={{ width: '100%', height: '100%' }}
+            resizeMode="cover"
+          />
         </SafeAreaView>
       </LinearGradient>
     );

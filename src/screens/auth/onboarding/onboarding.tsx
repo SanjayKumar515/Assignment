@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -9,14 +9,14 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   StatusBar,
-} from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { AuthStackProps } from '../../../@types';
-import Svg, { Path, Circle } from 'react-native-svg';
-import { Icon, Images, Colors, Fonts } from '../../../constant';
-import styles from './onboarding.styles';
+} from "react-native";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { AuthStackProps } from "../../../@types";
+import Svg, { Path, Circle } from "react-native-svg";
+import { Icon, Images, Colors, Fonts } from "../../../constant";
+import styles from "./onboarding.styles";
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 interface SlideData {
   id: string;
@@ -26,22 +26,22 @@ interface SlideData {
 
 const ONBOARDING_SLIDES: SlideData[] = [
   {
-    id: '1',
-    title: 'Support When You Need It Most',
+    id: "1",
+    title: "Support When You Need It Most",
     description:
-      'Navigate your emotions with ease. Manage stress, find calm, and receive guidance whenever life feels overwhelming.',
+      "Navigate your emotions with ease. Manage stress, find calm, and receive guidance whenever life feels overwhelming.",
   },
   {
-    id: '2',
-    title: 'Track Your Daily Journey & Calmness',
+    id: "2",
+    title: "Track Your Daily Journey & Calmness",
     description:
-      'Log your moods, emotions, and thoughts every day to visualize your mental health patterns and build mindfulness habits.',
+      "Log your moods, emotions, and thoughts every day to visualize your mental health patterns and build mindfulness habits.",
   },
   {
-    id: '3',
-    title: 'Stay Connected to Your Support System',
+    id: "3",
+    title: "Stay Connected to Your Support System",
     description:
-      'Connect with clinicians, mentors, and trusted supporters who can guide and encourage you.',
+      "Connect with clinicians, mentors, and trusted supporters who can guide and encourage you.",
   },
 ];
 
@@ -49,12 +49,16 @@ const Onboarding: FC = () => {
   const navigation = useNavigation<NavigationProp<AuthStackProps>>();
   const flatListRef = useRef<FlatList<SlideData>>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedMood, setSelectedMood] = useState<string | null>('peaceful');
+  const [selectedMood, setSelectedMood] = useState<string | null>("peaceful");
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / SCREEN_WIDTH);
-    if (index !== currentIndex && index >= 0 && index < ONBOARDING_SLIDES.length) {
+    if (
+      index !== currentIndex &&
+      index >= 0 &&
+      index < ONBOARDING_SLIDES.length
+    ) {
       setCurrentIndex(index);
     }
   };
@@ -69,13 +73,13 @@ const Onboarding: FC = () => {
       setCurrentIndex(nextIndex);
     } else {
       // Navigate to Signin
-      navigation.navigate('Signin');
+      navigation.navigate("Signin");
     }
   };
 
   const renderVisualSlide = (id: string) => {
     switch (id) {
-      case '1':
+      case "1":
         return (
           <View style={styles.slide}>
             <View style={styles.blobContainer}>
@@ -93,20 +97,35 @@ const Onboarding: FC = () => {
                 <View style={styles.calmHeader}>
                   <View style={styles.calmRow}>
                     <View style={styles.leafIconContainer}>
-                      <Icon family="Feather" name="feather" size={12} color="#bd5807" />
+                      <Icon
+                        family="Feather"
+                        name="feather"
+                        size={12}
+                        color="#bd5807"
+                      />
                     </View>
                     <Text style={styles.calmText}>Calm</Text>
                   </View>
-                  <Icon family="Feather" name="chevron-right" size={14} color="#bd5807" />
+                  <Icon
+                    family="Feather"
+                    name="chevron-right"
+                    size={14}
+                    color="#bd5807"
+                  />
                 </View>
                 <View style={styles.progressTrack}>
-                  <View style={[styles.progressBar, { width: '45%' }]} />
+                  <View style={[styles.progressBar, { width: "45%" }]} />
                 </View>
               </View>
 
               {/* Floating Heart Icon */}
               <View style={styles.heartBadge}>
-                <Icon family="FontAwesome" name="heart" size={12} color="#be5c00" />
+                <Icon
+                  family="FontAwesome"
+                  name="heart"
+                  size={12}
+                  color="#be5c00"
+                />
               </View>
 
               {/* Wavy Breathing Line SVG */}
@@ -131,7 +150,9 @@ const Onboarding: FC = () => {
               <View style={styles.breathingTextContainer}>
                 <Text style={styles.breathingText}>Slow Breathing</Text>
                 <View style={styles.breathingDots}>
-                  <View style={[styles.breathingDot, styles.breathingDotActive]} />
+                  <View
+                    style={[styles.breathingDot, styles.breathingDotActive]}
+                  />
                   <View style={styles.breathingDot} />
                   <View style={styles.breathingDot} />
                   <View style={styles.breathingDot} />
@@ -141,15 +162,15 @@ const Onboarding: FC = () => {
           </View>
         );
 
-      case '2':
+      case "2":
         // Modern and premium interactive mood tracker Slide
         const moods = [
-          { key: 'peaceful', emoji: '😌', label: 'Peaceful' },
-          { key: 'happy', emoji: '😃', label: 'Happy' },
-          { key: 'calm', emoji: '🍃', label: 'Calm' },
-          { key: 'grateful', emoji: '🙏', label: 'Grateful' },
-          { key: 'loved', emoji: '🥰', label: 'Loved' },
-          { key: 'focused', emoji: '🎯', label: 'Focused' },
+          { key: "peaceful", emoji: "😌", label: "Peaceful" },
+          { key: "happy", emoji: "😃", label: "Happy" },
+          { key: "calm", emoji: "🍃", label: "Calm" },
+          { key: "grateful", emoji: "🙏", label: "Grateful" },
+          { key: "loved", emoji: "🥰", label: "Loved" },
+          { key: "focused", emoji: "🎯", label: "Focused" },
         ];
 
         return (
@@ -157,7 +178,9 @@ const Onboarding: FC = () => {
             <View style={styles.dashboardContainer}>
               <View style={styles.dashHeader}>
                 <Text style={styles.dashTitle}>Daily Mindfulness Tracker</Text>
-                <Text style={styles.dashSubtitle}>How are you feeling right now?</Text>
+                <Text style={styles.dashSubtitle}>
+                  How are you feeling right now?
+                </Text>
               </View>
 
               <View style={styles.moodGrid}>
@@ -181,7 +204,10 @@ const Onboarding: FC = () => {
                       <Text
                         style={[
                           styles.moodText,
-                          isActive && { color: '#bd5807', fontFamily: Fonts.SemiBold },
+                          isActive && {
+                            color: "#bd5807",
+                            fontFamily: Fonts.SemiBold,
+                          },
                         ]}
                       >
                         {mood.label}
@@ -194,7 +220,12 @@ const Onboarding: FC = () => {
               {/* Interactive streak widget */}
               <View style={styles.streakCard}>
                 <View style={styles.streakLeft}>
-                  <Icon family="Feather" name="award" size={20} color="#ffffff" />
+                  <Icon
+                    family="Feather"
+                    name="award"
+                    size={20}
+                    color="#ffffff"
+                  />
                   <View style={styles.streakInfo}>
                     <Text style={styles.streakTitle}>Mindfulness Streak</Text>
                     <Text style={styles.streakSub}>Keep it up tomorrow!</Text>
@@ -208,7 +239,7 @@ const Onboarding: FC = () => {
           </View>
         );
 
-      case '3':
+      case "3":
         return (
           <View style={styles.slide}>
             <View style={styles.benchContainer}>
@@ -225,10 +256,20 @@ const Onboarding: FC = () => {
 
               <View style={[styles.communityIcon, styles.chatBadge]}>
                 <View style={styles.chatDots}>
-                  <Icon family="MaterialCommunityIcons" name="message-text-outline" size={12} color="#45a2ad" />
+                  <Icon
+                    family="MaterialCommunityIcons"
+                    name="message-text-outline"
+                    size={12}
+                    color="#45a2ad"
+                  />
                 </View>
                 <View style={styles.userCircle}>
-                  <Icon family="Feather" name="user" size={11} color="#d4791a" />
+                  <Icon
+                    family="Feather"
+                    name="user"
+                    size={11}
+                    color="#d4791a"
+                  />
                 </View>
               </View>
 
@@ -241,8 +282,22 @@ const Onboarding: FC = () => {
                   strokeWidth="2.5"
                   strokeDasharray="4, 4"
                 />
-                <Circle cx="12" cy="35" r="4.5" fill="#fcf6ec" stroke="#e8a853" strokeWidth="2" />
-                <Circle cx="165" cy="30" r="4.5" fill="#fcf6ec" stroke="#e8a853" strokeWidth="2" />
+                <Circle
+                  cx="12"
+                  cy="35"
+                  r="4.5"
+                  fill="#fcf6ec"
+                  stroke="#e8a853"
+                  strokeWidth="2"
+                />
+                <Circle
+                  cx="165"
+                  cy="30"
+                  r="4.5"
+                  fill="#fcf6ec"
+                  stroke="#e8a853"
+                  strokeWidth="2"
+                />
               </Svg>
             </View>
           </View>
@@ -257,7 +312,11 @@ const Onboarding: FC = () => {
 
   return (
     <View style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff8f2" translucent={true} />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="#fff8f2"
+        translucent={true}
+      />
       <View style={styles.container}>
         {/* Top Visual Slider */}
         <FlatList
@@ -294,9 +353,15 @@ const Onboarding: FC = () => {
           </View>
 
           {/* Next / Get Started Button */}
-          <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={handleNext}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.85}
+            onPress={handleNext}
+          >
             <Text style={styles.buttonText}>
-              {currentIndex === ONBOARDING_SLIDES.length - 1 ? 'Get Started' : 'Next'}
+              {currentIndex === ONBOARDING_SLIDES.length - 1
+                ? "Get Started"
+                : "Next"}
             </Text>
           </TouchableOpacity>
         </View>

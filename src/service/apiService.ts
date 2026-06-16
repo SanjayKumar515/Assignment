@@ -64,20 +64,43 @@ export const UserService = {
     });
   },
   refreshToken: async (token: string) => {
-    return APIKit.post('auth/refresh', {}, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var requestOptions: RequestInit = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    try {
+      const response = await fetch("https://testlink4.pillersofttechnologies.com/api/auth/refresh", requestOptions);
+      const result = await response.json();
+      return { status: response.status, data: result };
+    } catch (error) {
+      console.log('error', error);
+      throw error;
+    }
   },
   logoutUser: async (token: string) => {
-    return APIKit.post('auth/logout', {}, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var requestOptions: RequestInit = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    try {
+      const response = await fetch("https://testlink4.pillersofttechnologies.com/api/auth/logout", requestOptions);
+      const result = await response.text();
+      console.log(result);
+      return { status: response.status, data: result };
+    } catch (error) {
+      console.log('error', error);
+      throw error;
+    }
   },
 };
 

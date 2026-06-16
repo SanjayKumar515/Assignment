@@ -14,8 +14,22 @@ const Dashboard: FC = () => {
   const { userData, setUserData, setIsLoggedIn } =
     useContext<any>(UserDataContext);
 
-  const handleLogout = () => {
-    handleSignout(setIsLoggedIn);
+  const handleLogout = async () => {
+    try {
+      const storedUser = await LocalStorage.read('@user');
+      const token =
+        storedUser?.token ||
+        storedUser?.access_token ||
+        storedUser?.authorisation?.token;
+
+      if (token) {
+        await UserService.logoutUser(token);
+      }
+    } catch (error) {
+      console.log('Logout API failed:', error);
+    } finally {
+      handleSignout(setIsLoggedIn);
+    }
   };
   useEffect(() => {
     const fetchProfile = async () => {
@@ -168,9 +182,15 @@ const Dashboard: FC = () => {
       >
         {/* Header Section */}
         <View style={styles.headerContainer}>
-          <View>
+          <View style={{ flex: 1, paddingRight: wp(2) }}>
             <Text style={styles.greetingTitle}>
-              Hi, Good Morning,{'\n'}
+              Hi, Good Morning,
+            </Text>
+            <Text 
+              style={styles.greetingTitle}
+              numberOfLines={1} 
+              ellipsizeMode="tail"
+            >
               {userName}! 👋
             </Text>
             <Text style={styles.greetingSubtitle}>
