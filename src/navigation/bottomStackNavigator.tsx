@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../screens/index';
 import { Icon, Colors, Fonts } from '../constant';
@@ -7,6 +7,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { UserDataContext } from '../context/userDataContext';
+import { LocalStorage } from '../helpers/localstorage';
 
 // Stubs for Tools, Plan, Meeting so they display beautifully
 const ToolsPlaceholder: FC = () => (
@@ -25,15 +27,29 @@ const PlanPlaceholder: FC = () => (
   </View>
 );
 
-const MeetingPlaceholder: FC = () => (
-  <View style={styles.placeholderContainer}>
-    <Icon family="Feather" name="user" size={50} color="#b85e00" />
-    <Text style={styles.placeholderTitle}>Meetings</Text>
-    <Text style={styles.placeholderText}>
-      Join support groups and meetings.
-    </Text>
-  </View>
-);
+const MeetingPlaceholder: FC = () => {
+  const { setIsLoggedIn } = useContext(UserDataContext);
+
+  const handleLogout = async () => {
+    await LocalStorage.removeItem('@login');
+    await LocalStorage.removeItem('@user');
+    await LocalStorage.removeItem('@token');
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <View style={styles.placeholderContainer}>
+      <Icon family="Feather" name="user" size={50} color="#b85e00" />
+      <Text style={styles.placeholderTitle}>Meetings</Text>
+      <Text style={styles.placeholderText}>
+        Join support groups and meetings.
+      </Text>
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 // Dummy screen for Help just to satisfy the navigator requirement
 const HelpPlaceholder: FC = () => (
@@ -150,6 +166,18 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Regular,
     color: '#666',
     textAlign: 'center',
+  },
+  logoutButton: {
+    marginTop: hp(4),
+    paddingVertical: hp(1.5),
+    paddingHorizontal: wp(8),
+    backgroundColor: '#b85e00',
+    borderRadius: wp(2),
+  },
+  logoutText: {
+    color: '#fff',
+    fontFamily: Fonts.Bold,
+    fontSize: wp(4),
   },
   customHelpButtonWrapper: {
     top: hp(-3),

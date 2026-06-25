@@ -18,7 +18,7 @@ export const SetAPIResponseInterceptors = ({ On401Error = () => {} }) => {
       return response;
     },
     (error) => {
-      return error;
+      return Promise.reject(error);
     },
   );
 };
@@ -64,7 +64,6 @@ export const UserService = {
     var requestOptions: RequestInit = {
       method: "POST",
       headers: myHeaders,
-      redirect: "follow",
     };
 
     try {
@@ -86,7 +85,6 @@ export const UserService = {
     var requestOptions: RequestInit = {
       method: "POST",
       headers: myHeaders,
-      redirect: "follow",
     };
 
     try {
